@@ -1,21 +1,20 @@
-* {
-  box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
+html { scroll-behavior: smooth; }
+body { margin: 0; overflow-x: hidden; }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #111;
-  background: #fff;
-}
+@layer components {
+  .preview-primary-cta {
+    @apply inline-flex min-h-11 items-center justify-center rounded-md bg-forest-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-forest-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-600 active:translate-y-px;
+  }
 
-main {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 64px 24px;
+  .preview-secondary-cta {
+    @apply inline-flex min-h-11 items-center justify-center rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-medium text-gray-700 shadow-sm transition-colors duration-200 hover:border-gray-400 hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500 active:translate-y-px;
+  }
+
+  .preview-focus-ring {
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-600;
+  }
 }
