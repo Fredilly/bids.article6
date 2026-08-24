@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import TenderReviewForm from '../components/TenderReviewForm';
 
 const tenderRisks = [
   ['The response answers the topic, not the scored requirement', 'The wording may be relevant, but it does not explicitly address every element the buyer has asked the evaluator to assess.'],
@@ -166,13 +167,21 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="review" className="final-cta">
-        <div className="site-shell">
-          <p className="eyebrow">Before you submit</p>
-          <h2>The evaluator gets one final version. Know what they will have to score.</h2>
-          <p>Send us the tender title, buyer, deadline and a short note about where the draft stands. We will confirm whether an independent bid assurance review is a fit before any commercially sensitive documents are shared.</p>
-          <a href="mailto:fredilly@article6.org?subject=Article6%20Bids%20-%20Bid%20Assurance%20Review" className="light-cta">Request bid assurance</a>
-          <p className="micro">Commercially sensitive documents should only be shared after scope and handling are confirmed.</p>
+      <section id="review" className="review-intake">
+        <div className="site-shell intake-grid">
+          <div className="intake-copy">
+            <p className="eyebrow">Request bid assurance</p>
+            <h2>Send the package we will actually review.</h2>
+            <p>Provide the tender details, deadline, buyer documents and your current response. We verify the full package before it is added to our review system.</p>
+            <div className="intake-points">
+              <span>Private document storage</span>
+              <span>Multiple tender files accepted</span>
+              <span>Linked directly to your review opportunity</span>
+            </div>
+          </div>
+          <div className="intake-panel">
+            <TenderReviewForm />
+          </div>
         </div>
       </section>
     </>
