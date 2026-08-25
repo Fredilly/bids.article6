@@ -178,6 +178,7 @@ export default function Home() {
               <span>Multiple tender files accepted</span>
               <span>Linked directly to your review opportunity</span>
             </div>
+            <p className="micro"><strong>Reviews from €750.</strong> Final pricing depends on submission size, complexity and deadline, and is confirmed before the review begins.</p>
           </div>
           <div className="intake-panel">
             <TenderReviewForm />
