@@ -173,12 +173,16 @@ export default function Home() {
             <p className="eyebrow">Request bid assurance</p>
             <h2>Send the package we will actually review.</h2>
             <p>Provide the tender details, deadline, buyer documents and your current response. We verify the full package before it is added to our review system.</p>
+            <div className="pricing-card">
+              <span>Pre-submission bid assurance</span>
+              <strong>From €750</strong>
+              <p>Final fee depends on submission size, complexity and deadline. We confirm the price before the review begins.</p>
+            </div>
             <div className="intake-points">
               <span>Private document storage</span>
               <span>Multiple tender files accepted</span>
               <span>Linked directly to your review opportunity</span>
             </div>
-            <p className="micro"><strong>Reviews from €750.</strong> Final pricing depends on submission size, complexity and deadline, and is confirmed before the review begins.</p>
           </div>
           <div className="intake-panel">
             <TenderReviewForm />
