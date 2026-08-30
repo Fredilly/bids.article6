@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import BidsHeader from '../components/BidsHeader';
 import BidsFooter from '../components/BidsFooter';
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <BidsHeader />
         <main>{children}</main>
         <BidsFooter />
+        <Analytics />
       </body>
     </html>
   );
