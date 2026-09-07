@@ -119,9 +119,7 @@ export default function FAQPage() {
     <>
       <section className="sample-hero">
         <div className="site-shell sample-narrow">
-          <p className="eyebrow">Tender review FAQ</p>
-          <h1>Tender review and bid assurance questions</h1>
-          <p className="lead">Practical answers about independent evaluator-side review, evidence, scoring risk, tight deadlines and final pre-submission assurance.</p>
+          <h1>Frequently Asked Questions</h1>
         </div>
       </section>
 
