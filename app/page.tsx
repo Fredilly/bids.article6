@@ -39,15 +39,50 @@ const assuranceUses = [
   ['Scoring leakage', 'Find places where capability exists but the response has not converted it into clear, scoreable evidence.'],
 ];
 
+const usefulWhen = [
+  'The tender is important, high-value or strongly competitive.',
+  'The response is substantially complete and an experienced internal team has already done the core work.',
+  'Multiple contributors, schedules or supporting documents need to stay consistent.',
+  'Evaluation criteria depend on specific evidence, proof or clearly mapped responses.',
+  'The deadline is approaching and the team needs prioritised independent findings rather than a rewrite.',
+];
+
+const framework = [
+  'Requirement extraction',
+  'Evaluation mapping',
+  'Coverage',
+  'Evidence',
+  'Compliance',
+  'Consistency',
+  'Scoring leakage',
+  'Prioritised remediation',
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Article6 Bids independent pre-submission bid assurance',
+  url: 'https://bids.article6.org/',
+  provider: {
+    '@type': 'Organization',
+    name: 'Article6',
+    url: 'https://article6.org/',
+  },
+  description: 'Independent review of substantially complete tenders and bids against buyer requirements, evaluation criteria, evidence expectations, compliance instructions and cross-response consistency before submission.',
+  serviceType: 'Independent pre-submission tender and bid assurance review',
+};
+
 export default function Home() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+
       <section className="hero">
         <div className="site-shell hero-grid">
           <div>
             <p className="eyebrow">Independent pre-submission bid assurance</p>
             <h1>Your tender is written. But is everything the buyer needs to score actually there?</h1>
-            <p className="lead">Your team knows the business. The evaluator only knows what is in the submission. We independently test the draft against the buyer&apos;s requirements, evaluation criteria, evidence expectations and submission rules before you submit.</p>
+            <p className="lead">For important competitive tenders where an experienced team has already produced a substantially complete submission, Article6 provides an independent outside challenge against the buyer&apos;s requirements, evaluation criteria, evidence expectations and submission rules before you submit.</p>
             <div className="cta-row">
               <Link href="#review" className="cta-primary">Review my tender</Link>
               <Link href="#what-we-check" className="cta-secondary">See what we check</Link>
@@ -57,7 +92,7 @@ export default function Home() {
 
           <div className="review-card">
             <div className="review-card-head">
-              <small>Article6 Bids</small>
+              <small>Illustrative example</small>
               <h3>Bid assurance finding</h3>
             </div>
             {findings.map(([label, value]) => (
@@ -65,7 +100,10 @@ export default function Home() {
                 <span>{label}</span><strong>{value}</strong>
               </div>
             ))}
-            <div className="review-note">A finding is tied back to what the buyer is evaluating and the evidence available to support the score.</div>
+            <div className="review-note">Illustrative only. A finding is tied back to what the buyer is evaluating and the evidence available to support the score.</div>
+            <div className="review-card-link">
+              <Link href="/sample-review">See the worked sample review</Link>
+            </div>
           </div>
         </div>
       </section>
@@ -101,7 +139,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="what-we-check" className="section">
+      <section className="section">
+        <div className="site-shell">
+          <p className="eyebrow">When Article6 is useful</p>
+          <h2>Built for the final stage of serious competitive bids.</h2>
+          <p className="section-intro">Article6 is most useful when the core response already exists and the remaining question is whether the submission is complete, evidenced, compliant and easy to evaluate under deadline pressure.</p>
+          <ul className="use-list">
+            {usefulWhen.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section id="what-we-check" className="section muted-section">
         <div className="site-shell">
           <p className="eyebrow">What we check</p>
           <h2>Bid assurance against the buyer&apos;s own evaluation framework.</h2>
@@ -115,6 +164,22 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="site-shell">
+          <p className="eyebrow">Review method</p>
+          <h2>A clear framework from requirement extraction to remediation.</h2>
+          <p className="section-intro">The review follows the buyer&apos;s material through a consistent assurance sequence so findings stay tied to the published requirement and the draft evidence available.</p>
+          <ol className="method-flow">
+            {framework.map((item, index) => (
+              <li key={item}>
+                <small>{String(index + 1).padStart(2, '0')}</small>
+                <strong>{item}</strong>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -150,7 +215,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="how-it-works" className="section muted-section">
+      <section className="section muted-section">
+        <div className="site-shell">
+          <p className="eyebrow">Scope integrity</p>
+          <h2>Independent assurance, with clear boundaries.</h2>
+          <div className="grid-2">
+            <div className="deliverable">
+              <h3>What Article6 reviews</h3>
+              <p>Buyer requirements, evaluation criteria, response coverage, supporting evidence, compliance instructions, cross-document consistency and places where genuine capability is not clearly converted into a scoreable response.</p>
+            </div>
+            <div className="deliverable">
+              <h3>What Article6 does not do</h3>
+              <p>We do not invent evidence, credentials, past performance or client claims. We do not replace the internal bid team or take ownership of the final submission. Findings are based on the buyer material and the draft package provided for review.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" className="section">
         <div className="site-shell">
           <p className="eyebrow">How it works</p>
           <h2>One final assurance pass before the buyer sees it.</h2>
@@ -173,6 +255,7 @@ export default function Home() {
             <p className="eyebrow">Request bid assurance</p>
             <h2>Send the package we will actually review.</h2>
             <p>Provide the tender details, deadline, buyer documents and your current response. We verify the full package before it is added to our review system.</p>
+            <p className="deadline-note"><strong>Short review window?</strong> Submit the current package and deadline. We will determine whether a useful assurance review can be completed before accepting the engagement.</p>
             <div className="pricing-card">
               <span>Pre-submission bid assurance</span>
               <strong>From €750</strong>
