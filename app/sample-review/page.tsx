@@ -2,51 +2,50 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Worked Sample Review | Article6 Bids',
-  description: 'A fictional worked example showing how Article6 Bids tests a tender response against buyer requirements, evaluation criteria, evidence, compliance and scoring risk.',
+  title: 'Sample Tender Assurance Review | Article6 Bids',
+  description: 'See how Article6 reviews a tender against buyer requirements, evaluation criteria, evidence, compliance and cross-document consistency before submission.',
   alternates: { canonical: '/sample-review' },
 };
+
+const samplePdfUrl = process.env.NEXT_PUBLIC_SAMPLE_REVIEW_PDF_URL;
 
 const sampleSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Article6 Bids worked sample review',
+  name: 'Sample Tender Assurance Review | Article6 Bids',
   url: 'https://bids.article6.org/sample-review',
-  description: 'A fictional worked example demonstrating the Article6 pre-submission bid assurance methodology.',
+  description: 'A fictional worked example demonstrating how Article6 reviews a tender against buyer requirements, evaluation criteria, evidence, compliance and cross-document consistency before submission.',
   isPartOf: {
     '@type': 'WebSite',
     name: 'Article6 Bids',
     url: 'https://bids.article6.org/',
   },
-  about: {
-    '@type': 'Service',
-    name: 'Independent pre-submission tender and bid assurance review',
-  },
 };
 
-const sampleRows = [
-  ['Context', 'Fictional public-sector facilities tender. The bidder has an experienced internal team and a substantially complete submission. The buyer has published a weighted mobilisation criterion and requests a detailed implementation plan supported by relevant delivery evidence.'],
-  ['Buyer requirement', 'Provide a mobilisation plan covering governance, staffing, transition activities, key milestones, dependencies, risk controls and readiness for service commencement.'],
-  ['Evaluation criterion', 'Quality and credibility of the proposed mobilisation approach, including whether the bidder demonstrates a realistic, evidenced plan capable of achieving service commencement on the required date.'],
-  ['Illustrative response', '“Our mobilisation team will begin immediately following contract award. We have extensive experience transitioning comparable services and will use our proven mobilisation methodology. A dedicated mobilisation manager will coordinate workstreams, weekly governance meetings and readiness checks. We expect mobilisation to be completed within six weeks.”'],
-  ['Article6 finding', 'The response describes a plausible approach but does not yet show enough evidence for an evaluator to test whether the six-week commitment is realistic. The draft refers to comparable transitions without identifying one, gives no measurable prior outcome, and does not map the six-week timeline to the buyer’s required commencement date.'],
-  ['Evaluator risk', 'The evaluator may accept that the bidder understands mobilisation but have limited basis for awarding stronger marks for credibility, deliverability and evidence. The evaluator must infer that prior experience supports the proposed timescale.'],
-  ['Evidence gap', 'No named comparable mobilisation, no duration or outcome from that mobilisation, no milestone schedule in the response, and no explicit reconciliation between the proposed six-week period and the buyer’s stated commencement date.'],
-  ['Priority', 'High. The issue affects a weighted quality criterion and a core delivery commitment.'],
-  ['Required action', 'Add one relevant mobilisation example with a measurable outcome; show the main mobilisation milestones and dependencies; state how the proposed timeline aligns with the required commencement date; reconcile any different mobilisation dates elsewhere in the submission.'],
-  ['Example resolution', '“For a comparable multi-site transition, our mobilisation team completed readiness activity in 38 days against a 42-day plan, with all critical staffing, access and service-continuity controls signed off before go-live. For this contract, the six-week plan runs from award to the buyer’s required service commencement date and is structured around four control points: mobilisation launch, staffing and access readiness, operational acceptance, and final go-live approval. The detailed schedule in Appendix M1 sets out owners, dependencies and escalation points for each milestone.”'],
-  ['Explanation', 'The revised example does not merely add persuasive language. It connects the commitment to evidence, makes the timing testable, and gives the evaluator a clearer route from the published criterion to the proof in the response and supporting schedule.'],
+const summaryRows = [
+  ['Mandatory compliance', 'Green', 'No material blocker identified in this example'],
+  ['Requirement coverage', 'Amber', 'One high-weighted criterion is only partially evidenced'],
+  ['Evidence strength', 'Amber', 'Relevant experience is claimed but not converted into specific proof'],
+  ['Cross-document consistency', 'Red', 'Resource and go-live commitments conflict'],
+  ['Evaluator clarity', 'Amber', 'Evaluator must infer too much in key areas'],
 ];
 
-const framework = [
-  ['01', 'Requirement extraction', 'Identify the explicit buyer request, mandatory instruction and requested output.'],
-  ['02', 'Evaluation mapping', 'Connect the requirement to the published criterion and what the evaluator is being asked to judge.'],
-  ['03', 'Coverage', 'Check whether every element of the requirement is answered directly.'],
-  ['04', 'Evidence', 'Test whether important claims are supported by specific proof, outcomes, metrics or references.'],
-  ['05', 'Compliance', 'Check mandatory conditions, limits, formats, declarations and submission instructions.'],
-  ['06', 'Consistency', 'Compare commitments, figures, dates and assumptions across the response and attachments.'],
-  ['07', 'Scoring leakage', 'Identify where genuine capability exists but the evaluator must infer too much to award the available marks confidently.'],
-  ['08', 'Prioritised remediation', 'Turn the highest-impact issues into specific actions the bid team can resolve before submission.'],
+const commitments = [
+  ['Mobilisation duration', '6 weeks', '42 days', '–', 'Consistent'],
+  ['Mobilisation Manager', 'Full-time', 'Named lead', '0.5 FTE', 'Conflict'],
+  ['Governance meetings', 'Weekly', 'Weekly', '–', 'Consistent'],
+  ['Go-live date', '1 Nov', '1 Nov', '8 Nov', 'Conflict'],
+];
+
+const method = [
+  'Requirement extraction',
+  'Evaluation mapping',
+  'Coverage',
+  'Evidence',
+  'Compliance',
+  'Consistency',
+  'Scoring leakage',
+  'Prioritised remediation',
 ];
 
 export default function SampleReviewPage() {
@@ -58,59 +57,125 @@ export default function SampleReviewPage() {
         <div className="site-shell sample-narrow">
           <p className="eyebrow">Worked demonstration</p>
           <h1>Sample bid assurance review</h1>
-          <p className="lead">This page is a fictional, illustrative demonstration of the Article6 methodology. It is not a customer engagement, testimonial, case study or achieved client result.</p>
-          <div className="sample-notice"><strong>Illustrative material only.</strong> The buyer, bidder, requirement, response, evidence and findings below are fictional and exist only to show how an assurance review is structured.</div>
+          <p className="lead">A worked example showing how Article6 tests a substantially complete tender against the buyer&apos;s requirements, evaluation criteria, evidence expectations and submission rules before submission.</p>
+          <div className="sample-notice"><strong>Illustrative Sample - Not a Client Engagement</strong><br />All buyer, bidder, response, evidence and finding material on this page is fictional and provided only to demonstrate the review methodology.</div>
+          <div className="cta-row">
+            {samplePdfUrl ? (
+              <a href={samplePdfUrl} className="cta-primary">Download sample review PDF</a>
+            ) : (
+              <span className="cta-primary cta-disabled" aria-disabled="true">Download sample review PDF</span>
+            )}
+            <Link href="/#review" className="cta-secondary">Request bid assurance</Link>
+          </div>
         </div>
       </section>
 
       <section className="section muted-section">
         <div className="site-shell sample-narrow">
-          <p className="eyebrow">The worked example</p>
-          <h2>From buyer requirement to prioritised remediation.</h2>
-          <p className="section-intro">A review finding is useful only when the team can trace it back to the buyer material, understand the evaluation risk and see what needs to change.</p>
-          <dl className="sample-review-list">
-            {sampleRows.map(([label, value]) => (
-              <div className="sample-review-row" key={label}>
-                <dt>{label}</dt>
-                <dd>{value}</dd>
-              </div>
-            ))}
+          <p className="eyebrow">Assurance summary</p>
+          <h2>Final pre-submission assurance</h2>
+          <dl className="sample-meta">
+            <div><dt>Tender</dt><dd>Illustrative Public-Sector Facilities Services Tender</dd></div>
+            <div><dt>Review stage</dt><dd>Final pre-submission assurance</dd></div>
+            <div><dt>Submission status</dt><dd>Substantially complete draft</dd></div>
           </dl>
+          <div className="assessment-banner"><span>Overall assessment</span><strong>AMBER - credible submission with material scoring leakage to resolve</strong></div>
+          <div className="table-wrap">
+            <table className="assurance-table">
+              <thead><tr><th>Area</th><th>Status</th><th>Article6 view</th></tr></thead>
+              <tbody>
+                {summaryRows.map(([area, status, view]) => (
+                  <tr key={area}><td>{area}</td><td><span className={`status status-${status.toLowerCase()}`}>{status}</span></td><td>{view}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="priority-findings">
+            <h3>Priority findings</h3>
+            <ul>
+              <li><strong>P1</strong> Mobilisation timescale insufficiently evidenced</li>
+              <li><strong>P1</strong> Mobilisation Manager commitment conflicts across documents</li>
+              <li><strong>P2</strong> Comparable experience lacks measurable outcomes</li>
+              <li><strong>P2</strong> Risk controls lack explicit ownership</li>
+            </ul>
+          </div>
         </div>
       </section>
 
       <section className="section">
         <div className="site-shell sample-narrow">
-          <p className="eyebrow">Method demonstrated</p>
-          <h2>The same review framework applied systematically.</h2>
-          <div className="sample-method">
-            {framework.map(([number, title, copy]) => (
-              <div className="sample-method-row" key={title}>
-                <small>{number}</small>
-                <div><h3>{title}</h3><p>{copy}</p></div>
-              </div>
-            ))}
+          <p className="eyebrow">Worked P1 finding</p>
+          <h2>Mobilisation commitment is not sufficiently evidenced</h2>
+          <div className="finding-priority">P1 - Must Resolve</div>
+          <div className="finding-block"><h3>Buyer requirement</h3><p>Provide a mobilisation plan covering governance, staffing, transition activities, key milestones, dependencies, risk controls and readiness for service commencement.</p></div>
+          <div className="finding-block"><h3>Evaluation focus</h3><p>Quality and credibility of the mobilisation approach, including whether the bidder demonstrates a realistic, evidenced plan capable of achieving service commencement on the required date.</p></div>
+          <div className="finding-block"><h3>Current response</h3><p>“Our mobilisation team will begin immediately following contract award. We have extensive experience transitioning comparable services and will use our proven mobilisation methodology. A dedicated mobilisation manager will coordinate workstreams, weekly governance meetings and readiness checks. We expect mobilisation to be completed within six weeks.”</p></div>
+          <div className="finding-block"><h3>Article6 assessment</h3><p>The approach is plausible, but the evaluator cannot adequately test whether the six-week commitment is credible. The response states experience and a delivery period without showing the comparable evidence, milestone sequence or timing reconciliation needed to support that commitment.</p></div>
+          <div className="finding-block"><h3>Evaluator risk</h3><p>The evaluator may recognise understanding of mobilisation but have insufficient evidence for stronger marks around credibility and deliverability.</p></div>
+          <div className="finding-block"><h3>Evidence gap</h3><ul><li>No identified comparable mobilisation</li><li>No measurable prior outcome</li><li>No clear milestone sequence</li><li>No explicit reconciliation with the required commencement date</li></ul></div>
+          <div className="finding-block"><h3>Required action</h3><ol><li>Add one relevant comparable mobilisation example with measurable evidence.</li><li>Show main milestones and dependencies.</li><li>Map the proposed timeline directly to the buyer&apos;s commencement date.</li><li>Reconcile the same commitment across all supporting documents.</li></ol></div>
+          <div className="finding-block"><h3>Example resolution</h3><p>For a comparable multi-site transition, the bidder could insert genuine, supportable evidence showing the actual mobilisation duration, readiness outcome and control points achieved, then map the current six-week plan directly to the buyer&apos;s required commencement date and the detailed implementation schedule.</p></div>
+          <div className="finding-block"><h3>Explanation</h3><p>The resolution should not simply add persuasive language. It should connect the delivery commitment to evidence, make the timing testable and give the evaluator a clear route from requirement to claim to proof.</p></div>
+        </div>
+      </section>
+
+      <section className="section muted-section">
+        <div className="site-shell sample-narrow">
+          <p className="eyebrow">Cross-document assurance</p>
+          <h2>The risk may only appear when the whole submission is compared</h2>
+          <p className="section-intro">Strong individual sections can still create evaluation risk when commitments conflict across schedules and attachments.</p>
+          <div className="table-wrap">
+            <table className="assurance-table commitment-table">
+              <thead><tr><th>Commitment</th><th>Main response</th><th>Implementation plan</th><th>Resource schedule</th><th>Finding</th></tr></thead>
+              <tbody>
+                {commitments.map(([commitment, main, plan, resource, finding]) => (
+                  <tr key={commitment} className={finding === 'Conflict' ? 'conflict-row' : undefined}><td>{commitment}</td><td>{main}</td><td>{plan}</td><td>{resource}</td><td><strong>{finding}</strong></td></tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="pullquote">The bidder should not require the evaluator to decide which of two conflicting commitments is the real one.</p>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="site-shell sample-narrow">
+          <p className="eyebrow">Submission close-out</p>
+          <h2>Prioritised actions for the time that remains</h2>
+          <div className="closeout-grid">
+            <div><h3>Must do</h3><ul><li>Resolve Mobilisation Manager contradiction</li><li>Reconcile go-live dates</li><li>Evidence mobilisation timescale</li><li>Verify mandatory declarations and submission instructions</li></ul></div>
+            <div><h3>Do if time allows</h3><ul><li>Quantify relevant previous outcomes</li><li>Strengthen ownership around risk controls</li><li>Improve evaluator signposting</li></ul></div>
+            <div><h3>Do not spend time on</h3><ul><li>Stylistic rewriting of already compliant sections</li><li>Terminology changes made only for tone</li><li>Polishing low-impact narrative while P1 findings remain unresolved</li></ul></div>
           </div>
         </div>
       </section>
 
       <section className="section muted-section">
         <div className="site-shell sample-narrow">
-          <p className="eyebrow">Scope</p>
-          <h2>What the example is showing, and what it is not.</h2>
-          <div className="grid-2">
-            <div className="deliverable">
-              <h3>Article6 is testing</h3>
-              <p>Whether the response answers the buyer&apos;s scored requirement, whether the evidence supports the claim, whether commitments are internally consistent, and what the team should prioritise before submission.</p>
-            </div>
-            <div className="deliverable">
-              <h3>Article6 is not creating</h3>
-              <p>Article6 does not invent the bidder&apos;s experience, metrics, credentials, evidence or customer history. Any final resolution must be grounded in evidence the bidder can genuinely support.</p>
-            </div>
-          </div>
+          <p className="eyebrow">Close-out criteria</p>
+          <h2>What resolved means</h2>
+          <p className="section-intro">A material finding is considered resolved when:</p>
+          <ul className="use-list"><li>The requirement is answered directly.</li><li>Supporting evidence is present.</li><li>Commitments are consistent.</li><li>Mandatory conditions are satisfied.</li><li>The evaluator can understand the connection between requirement, claim and evidence without inference.</li></ul>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="site-shell">
+          <p className="eyebrow">Review methodology</p>
+          <h2>A consistent assurance sequence</h2>
+          <ol className="method-flow compact-method">
+            {method.map((item, index) => <li key={item}><small>{String(index + 1).padStart(2, '0')}</small><strong>{item}</strong></li>)}
+          </ol>
+        </div>
+      </section>
+
+      <section className="section muted-section">
+        <div className="site-shell sample-narrow">
+          <p className="eyebrow">Independent final challenge</p>
+          <h2>Have a substantially complete tender that needs an independent final challenge?</h2>
           <div className="cta-row">
             <Link href="/#review" className="cta-primary">Request bid assurance</Link>
-            <Link href="/" className="cta-secondary">Back to Article6 Bids</Link>
+            <Link href="/faq" className="cta-secondary">Read the FAQ</Link>
           </div>
         </div>
       </section>
