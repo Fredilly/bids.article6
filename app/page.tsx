@@ -36,7 +36,7 @@ const assuranceUses = [
   ['Evaluator alignment', 'Test whether the response makes it easy for an evaluator to see why marks should be awarded.'],
   ['Evidence strength', 'Challenge claims that rely on assertion where the buyer is likely to expect proof, outcomes or measurable results.'],
   ['Compliance confidence', 'Check pass/fail requirements, instructions, limits and mandatory submission conditions before they become avoidable risk.'],
-  ['Scoring leakage', 'Find places where capability exists but the response has not converted it into clear, scoreable evidence.'],
+  ['Scoring leakage', 'Find places where genuine capability exists but the response has not converted it into clear, scoreable evidence.'],
 ];
 
 const usefulWhen = [
@@ -103,6 +103,7 @@ export default function Home() {
             <div className="review-note">Illustrative only. A finding is tied back to what the buyer is evaluating and the evidence available to support the score.</div>
             <div className="review-card-link">
               <Link href="/sample-review">See the worked sample review</Link>
+              <Link href="/faq">Questions about the review? Read the FAQ</Link>
             </div>
           </div>
         </div>
