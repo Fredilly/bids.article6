@@ -128,11 +128,14 @@ export default function FAQPage() {
       <section className="section muted-section">
         <div className="site-shell sample-narrow faq-list">
           {faqs.map((faq, index) => (
-            <article className="faq-item" key={faq.question}>
-              <small>{String(index + 1).padStart(2, '0')}</small>
-              <h2>{faq.question}</h2>
+            <details className="faq-item" key={faq.question}>
+              <summary className="faq-summary">
+                <span className="faq-index">{String(index + 1).padStart(2, '0')}</span>
+                <h2>{faq.question}</h2>
+                <span className="faq-toggle" aria-hidden="true">+</span>
+              </summary>
               <div className="faq-answer">{faq.answer}</div>
-            </article>
+            </details>
           ))}
         </div>
       </section>
