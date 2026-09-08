@@ -13,7 +13,8 @@ export default function BidsFooter() {
         <div className="footer-links">
           <Link href="/#why-review">Why Review</Link>
           <Link href="/#what-we-check">What We Check</Link>
-          <Link href="/#how-it-works">How It Works</Link>
+          <Link href="/sample-review">Sample Review</Link>
+          <Link href="/faq">FAQ</Link>
           <Link href="/#review">Request Review</Link>
         </div>
         <div className="copyright">© {new Date().getFullYear()} Article6. All rights reserved.</div>
