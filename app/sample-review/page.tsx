@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/sample-review' },
 };
 
-const samplePdfUrl = process.env.NEXT_PUBLIC_SAMPLE_REVIEW_PDF_URL;
+const samplePdfUrl = 'https://assets.bids.article6.org/samples/bids_sample_review.pdf';
 
 const sampleSchema = {
   '@context': 'https://schema.org',
@@ -53,11 +53,7 @@ export default function SampleReviewPage() {
           <p className="lead">The fictional bidder has a credible response and an experienced internal team. The main risk is not poor writing. It is that important commitments are not consistently evidenced across the submission.</p>
           <div className="sample-notice"><strong>Illustrative Sample - Not a Client Engagement</strong><br />All buyer, bidder, response, evidence and finding material on this page is fictional and provided only to demonstrate the review methodology.</div>
           <div className="cta-row">
-            {samplePdfUrl ? (
-              <a href={samplePdfUrl} className="cta-primary">Download sample review PDF</a>
-            ) : (
-              <span className="cta-primary cta-disabled" aria-disabled="true">Download sample review PDF</span>
-            )}
+            <a href={samplePdfUrl} className="cta-primary" target="_blank" rel="noopener noreferrer">Download sample review PDF</a>
             <Link href="/#review" className="cta-secondary">Request bid assurance</Link>
           </div>
         </div>
