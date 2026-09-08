@@ -72,9 +72,27 @@ const serviceSchema = {
   serviceType: 'Independent pre-submission tender and bid assurance review',
 };
 
+function MiniIcon({ type = 'check' }: { type?: 'check' | 'target' | 'evidence' | 'shield' | 'link' | 'score' | 'file' | 'action' }) {
+  const paths = {
+    check: <path d="m6 12 4 4 8-9" />,
+    target: <><circle cx="12" cy="12" r="7" /><circle cx="12" cy="12" r="2" /><path d="M17 7 21 3" /></>,
+    evidence: <><path d="M7 3h8l4 4v14H7z" /><path d="M15 3v5h5M10 12h6M10 16h5" /></>,
+    shield: <><path d="M12 3 5 6v5c0 4.5 2.8 8 7 10 4.2-2 7-5.5 7-10V6z" /><path d="m9 12 2 2 4-4" /></>,
+    link: <><path d="M9 15 7 17a3 3 0 1 1-4-4l3-3a3 3 0 0 1 4 0" /><path d="m15 9 2-2a3 3 0 1 1 4 4l-3 3a3 3 0 0 1-4 0M8 12h8" /></>,
+    score: <><path d="M5 19V9M12 19V5M19 19v-7" /></>,
+    file: <><path d="M7 3h8l4 4v14H7z" /><path d="M15 3v5h5" /></>,
+    action: <><path d="M5 12h14M14 7l5 5-5 5" /></>,
+  };
+  return <span className="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24">{paths[type]}</svg></span>;
+}
+
 export default function Home() {
+  const checkIcons: Array<'target' | 'check' | 'evidence' | 'shield' | 'link' | 'score'> = ['target', 'check', 'evidence', 'shield', 'link', 'score'];
+  const assuranceIcons: Array<'target' | 'evidence' | 'shield' | 'score'> = ['target', 'evidence', 'shield', 'score'];
+  const deliverableIcons: Array<'file' | 'score' | 'action' | 'link'> = ['file', 'score', 'action', 'link'];
+
   return (
-    <>
+    <div className="home-modern">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
 
       <section className="hero">
@@ -110,20 +128,21 @@ export default function Home() {
       </section>
 
       <section id="why-review" className="section muted-section">
-        <div className="site-shell">
-          <p className="eyebrow">The hidden risk</p>
-          <h2>A strong business can still leave marks on the table.</h2>
-          <p className="section-intro">Tender evaluation is not a judgement of everything your organisation can do. It is a judgement of what the submitted response demonstrates against the published criteria.</p>
-          <div className="risk-list">
+        <div className="site-shell risk-stage">
+          <div className="risk-stage-copy">
+            <p className="eyebrow">The hidden risk</p>
+            <h2>A strong business can still leave marks on the table.</h2>
+            <p className="section-intro">Tender evaluation is not a judgement of everything your organisation can do. It is a judgement of what the submitted response demonstrates against the published criteria.</p>
+            <p className="pullquote">Your capability is not what gets scored. The evidence in the submission is.</p>
+          </div>
+          <div className="risk-stack">
             {tenderRisks.map(([title, copy], index) => (
-              <div className="risk-row" key={title}>
-                <span className="risk-num">0{index + 1}</span>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </div>
+              <article className="risk-card" key={title}>
+                <span className="risk-num">{index + 1}</span>
+                <div><h3>{title}</h3><p>{copy}</p></div>
+              </article>
             ))}
           </div>
-          <p className="pullquote">Your capability is not what gets scored. The evidence in the submission is.</p>
         </div>
       </section>
 
@@ -135,16 +154,20 @@ export default function Home() {
           </div>
           <div>
             <p>We do not ask whether the bid simply sounds persuasive. We ask what the buyer requested, how the response will be evaluated, what evidence supports each important claim, and whether the evaluator can award the marks without having to infer your meaning.</p>
-            <p><strong>What was asked? What is being evaluated? Where is the proof? Is it easy to score?</strong></p>
+            <div className="dark-question-grid">
+              {['What was asked?', 'What is being evaluated?', 'Where is the proof?', 'Is it easy to score?'].map((item) => <div className="dark-question" key={item}>{item}</div>)}
+            </div>
           </div>
         </div>
       </section>
 
       <section className="section">
-        <div className="site-shell">
-          <p className="eyebrow">When Article6 is useful</p>
-          <h2>Built for the final stage of serious competitive bids.</h2>
-          <p className="section-intro">Article6 is most useful when the core response already exists and the remaining question is whether the submission is complete, evidenced, compliant and easy to evaluate under deadline pressure.</p>
+        <div className="site-shell use-band">
+          <div>
+            <p className="eyebrow">When Article6 is useful</p>
+            <h2>Built for the final stage of serious competitive bids.</h2>
+            <p className="section-intro">Article6 is most useful when the core response already exists and the remaining question is whether the submission is complete, evidenced, compliant and easy to evaluate under deadline pressure.</p>
+          </div>
           <ul className="use-list">
             {usefulWhen.map((item) => <li key={item}>{item}</li>)}
           </ul>
@@ -153,16 +176,18 @@ export default function Home() {
 
       <section id="what-we-check" className="section muted-section">
         <div className="site-shell">
-          <p className="eyebrow">What we check</p>
-          <h2>Bid assurance against the buyer&apos;s own evaluation framework.</h2>
-          <p className="section-intro">The review is anchored to the ITT, questionnaire, evaluation criteria, instructions and supporting schedules rather than a generic writing checklist.</p>
-          <div className="grid-3">
+          <div className="section-heading-row">
+            <div><p className="eyebrow">What we check</p><h2>Bid assurance against the buyer&apos;s own evaluation framework.</h2></div>
+            <p className="section-intro">The review is anchored to the ITT, questionnaire, evaluation criteria, instructions and supporting schedules rather than a generic writing checklist.</p>
+          </div>
+          <div className="check-mosaic">
             {checks.map(([title, copy], index) => (
-              <div className="check" key={title}>
+              <article className="check-tile" key={title}>
+                <MiniIcon type={checkIcons[index]} />
                 <small>0{index + 1}</small>
                 <h3>{title}</h3>
                 <p>{copy}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -173,45 +198,44 @@ export default function Home() {
           <p className="eyebrow">Review method</p>
           <h2>A clear framework from requirement extraction to remediation.</h2>
           <p className="section-intro">The review follows the buyer&apos;s material through a consistent assurance sequence so findings stay tied to the published requirement and the draft evidence available.</p>
-          <ol className="method-flow">
-            {framework.map((item, index) => (
-              <li key={item}>
-                <small>{String(index + 1).padStart(2, '0')}</small>
-                <strong>{item}</strong>
-              </li>
-            ))}
+          <ol className="method-track">
+            {framework.map((item, index) => <li className="method-node" key={item}><small>{String(index + 1).padStart(2, '0')}</small><strong>{item}</strong></li>)}
           </ol>
         </div>
       </section>
 
       <section className="section muted-section">
-        <div className="site-shell">
-          <p className="eyebrow">Independent bid assurance</p>
-          <h2>What experienced bid teams use an independent review for.</h2>
-          <p className="section-intro">The value is not another opinion on writing style. It is a final challenge to whether the submission is complete, evidenced, compliant and easy to evaluate.</p>
-          <div className="grid-2">
-            {assuranceUses.map(([title, copy]) => (
-              <div className="deliverable" key={title}><h3>{title}</h3><p>{copy}</p></div>
+        <div className="site-shell assurance-layout">
+          <div>
+            <p className="eyebrow">Independent bid assurance</p>
+            <h2>What experienced bid teams use an independent review for.</h2>
+            <p className="section-intro">The value is not another opinion on writing style. It is a final challenge to whether the submission is complete, evidenced, compliant and easy to evaluate.</p>
+            <p className="pullquote">Scoring leakage happens when your organisation can do the work, but the submission does not make the evidence easy to award marks for.</p>
+          </div>
+          <div className="assurance-grid">
+            {assuranceUses.map(([title, copy], index) => (
+              <article className="assurance-card" key={title}><MiniIcon type={assuranceIcons[index]} /><h3>{title}</h3><p>{copy}</p></article>
             ))}
           </div>
-          <p className="pullquote">Scoring leakage happens when your organisation can do the work, but the submission does not make the evidence easy to award marks for.</p>
         </div>
       </section>
 
       <section className="section">
-        <div className="site-shell">
-          <p className="eyebrow">What you receive</p>
-          <h2>A structured assurance review. Not another rewritten tender.</h2>
-          <p className="section-intro">We identify the issues that may weaken evaluation, explain the likely impact and give your team a clear action to resolve before the deadline.</p>
-          <div className="grid-2">
-            {deliverables.map(([title, copy]) => (
-              <div className="deliverable" key={title}><h3>{title}</h3><p>{copy}</p></div>
-            ))}
+        <div className="site-shell deliverable-layout">
+          <div>
+            <p className="eyebrow">What you receive</p>
+            <h2>A structured assurance review. Not another rewritten tender.</h2>
+            <p className="section-intro">We identify the issues that may weaken evaluation, explain the likely impact and give your team a clear action to resolve before the deadline.</p>
+            <div className="role-card">
+              <p className="eyebrow">The role of Article6</p>
+              <h3>You know your business. We test whether the evaluator can see enough of it to award the marks.</h3>
+              <p>Article6 does not replace your bid lead, writer or subject-matter experts. We act as the independent quality gate before submission, challenging requirement coverage, evidence, compliance and evaluation clarity.</p>
+            </div>
           </div>
-          <div className="highlight">
-            <p className="eyebrow">The role of Article6</p>
-            <h3>You know your business. We test whether the evaluator can see enough of it to award the marks.</h3>
-            <p>Article6 does not replace your bid lead, writer or subject-matter experts. We act as the independent quality gate before submission, challenging requirement coverage, evidence, compliance and evaluation clarity.</p>
+          <div className="deliverable-stack">
+            {deliverables.map(([title, copy], index) => (
+              <article className="deliverable-line" key={title}><MiniIcon type={deliverableIcons[index]} /><div><h3>{title}</h3><p>{copy}</p></div></article>
+            ))}
           </div>
         </div>
       </section>
@@ -220,32 +244,34 @@ export default function Home() {
         <div className="site-shell">
           <p className="eyebrow">Scope integrity</p>
           <h2>Independent assurance, with clear boundaries.</h2>
-          <div className="grid-2">
-            <div className="deliverable">
+          <div className="scope-split">
+            <article className="scope-panel">
+              <span className="scope-label">Inside scope</span>
               <h3>What Article6 reviews</h3>
               <p>Buyer requirements, evaluation criteria, response coverage, supporting evidence, compliance instructions, cross-document consistency and places where genuine capability is not clearly converted into a scoreable response.</p>
-            </div>
-            <div className="deliverable">
+            </article>
+            <article className="scope-panel scope-no">
+              <span className="scope-label">Outside scope</span>
               <h3>What Article6 does not do</h3>
               <p>We do not invent evidence, credentials, past performance or client claims. We do not replace the internal bid team or take ownership of the final submission. Findings are based on the buyer material and the draft package provided for review.</p>
-            </div>
+            </article>
           </div>
         </div>
       </section>
 
       <section id="how-it-works" className="section">
         <div className="site-shell">
-          <p className="eyebrow">How it works</p>
-          <h2>One final assurance pass before the buyer sees it.</h2>
-          <div className="steps">
+          <div className="section-heading-row">
+            <div><p className="eyebrow">How it works</p><h2>One final assurance pass before the buyer sees it.</h2></div>
+            <p className="section-intro">A simple handoff, an independent challenge, then a clear set of actions your team can resolve before submission.</p>
+          </div>
+          <div className="process-rail">
             {[
               ['01', 'Send the tender pack', 'Buyer documents, current draft and submission deadline.'],
               ['02', 'We map the evaluation', 'Requirements, evaluation criteria, evidence expectations and compliance instructions.'],
               ['03', 'We challenge the draft', 'Prioritised findings linked to the requirement, evaluation impact and required action.'],
               ['04', 'Your team resolves', 'You retain ownership and decide the final submission changes.'],
-            ].map(([number, title, copy]) => (
-              <div className="step" key={number}><small>{number}</small><h3>{title}</h3><p>{copy}</p></div>
-            ))}
+            ].map(([number, title, copy]) => <article className="process-step" key={number}><small>{number}</small><h3>{title}</h3><p>{copy}</p></article>)}
           </div>
         </div>
       </section>
@@ -268,11 +294,9 @@ export default function Home() {
               <span>Linked directly to your review opportunity</span>
             </div>
           </div>
-          <div className="intake-panel">
-            <TenderReviewForm />
-          </div>
+          <div className="intake-panel"><TenderReviewForm /></div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
