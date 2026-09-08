@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import './geo.css';
+import './homepage-modern.css';
 import BidsHeader from '../components/BidsHeader';
 import BidsFooter from '../components/BidsFooter';
 
