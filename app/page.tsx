@@ -99,7 +99,7 @@ export default function Home() {
         <div className="site-shell hero-grid">
           <div>
             <p className="eyebrow">Independent pre-submission bid assurance</p>
-            <h1>Your tender is written. But is everything the buyer needs to score actually there?</h1>
+            <h1>Is your tender easy to score?</h1>
             <p className="lead">For important competitive tenders where an experienced team has already produced a substantially complete submission, Article6 provides an independent outside challenge against the buyer&apos;s requirements, evaluation criteria, evidence expectations and submission rules before you submit.</p>
             <div className="cta-row">
               <Link href="#review" className="cta-primary">Review my tender</Link>
