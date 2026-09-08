@@ -7,6 +7,7 @@ const links = [
   { href: '/#why-review', label: 'Why Review' },
   { href: '/#what-we-check', label: 'What We Check' },
   { href: '/#how-it-works', label: 'How It Works' },
+  { href: 'mailto:contact@article6.org', label: 'Contact' },
   { href: '/#review', label: 'Request Review' },
 ];
 
